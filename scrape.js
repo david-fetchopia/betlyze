@@ -7,6 +7,7 @@ var cheerio = require("cheerio");
 
 // Initialize Express
 //var app = express();
+
 function parseChampionshipTeam(input) {
     var result = input.split(" ");
     result.splice(0,1);
@@ -35,19 +36,19 @@ function parseChampionshipOdds(input) {
     return result;
 }
 
-axios.get("https://www.oddsshark.com/nba/odds#futures").then(function (response) {
-    var casinoColumnHeaders = ["OPENING", "bodog", "SPORTS INTERACTION", "BETONLINE.ag", "intertops", "betway", "PINNACLE", "5Dimes", "10bet", "sportbet"];
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
-    var result = {}
-    
-    result.team = parseChampionshipTeam($("div.op-team").text());
-    
-    
-    //console.log   result['Golden']);
-    result.odd = parseChampionshipOdds($("div.op-future-item").text());
-    
-    console.log(result.odd[0]);
-    
-    console.log("Scrape Complete");
+axios.get("https://api.sportsdata.io/v3/nba/stats/json/Players/NY?key=86600b23e0354824817ada59ce29db5b").then(function(response) {
+    console.log(response.data);
 });
+
+// axios.get("https://www.oddsshark.com/nba/odds#futures").then(function (response) {
+//     var casinoColumnHeaders = ["OPENING", "bodog", "SPORTS INTERACTION", "BETONLINE.ag", "intertops", "betway", "PINNACLE", "5Dimes", "10bet", "sportbet"];
+//     // Then, we load that into cheerio and save it to $ for a shorthand selector
+//     var $ = cheerio.load(response.data);
+//     var result = {}
+    
+//     result.team = parseChampionshipTeam($("div.op-team").text());
+//     result.odd = parseChampionshipOdds($("div.op-future-item").text());
+    
+//     console.log(result.odd[0]);
+//     console.log("Scrape Complete");
+// });
